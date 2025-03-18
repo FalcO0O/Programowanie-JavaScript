@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Plik 'zadanie1C.html'</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+<h1>Plik 'zadanie1C.html'</h1>
+Zobacz, co wyświetliła konsola przeglądarki WWW; widoczne tam komunikaty
+są rozwijalne.
+<script>
+    const cssStyle = "border-style: solid; border-color: green";
+    const tablica = [1, 2, 3];
+    const obiekt = {
+        a: 1,
+        b: 2,
+        c: 3
+    };
+
+    console.clear();
+
+    console.groupCollapsed('Wyświetlanie komunikatów');
+    console.log("%cconsole.log('Komunikat zwykły')", cssStyle);
+    console.log('Komunikat zwykły')
+    console.log("%cconsole.warn('Komunikat ostrzeżenia')", cssStyle);
+    console.warn('Komunikat ostrzeżenia');
+    console.log("%cconsole.error('Komunikat błędu')", cssStyle);
+    console.error('Komunikat błędu');
+    console.groupEnd('Wyświetlanie komunikatów');
+
+    console.groupCollapsed('Wyświetlanie tablicy');
+    console.log("%cconsole.log(tablica)", cssStyle);
+    console.log(tablica);
+    console.log("%cconsole.table(tablica)", cssStyle);
+    console.table(tablica);
+    console.log("%cconsole.dir(tablica)", cssStyle);
+    console.dir(tablica);
+    console.groupEnd('Wyświetlanie tablicy');
+
+    console.groupCollapsed('Wyświetlanie obiektu');
+    console.log("%cconsole.log(obiekt)", cssStyle);
+    console.log(obiekt);
+    console.log("%cconsole.table(obiekt)", cssStyle);
+    console.table(obiekt);
+    console.log("%cconsole.dir(obiekt)", cssStyle);
+    console.dir(obiekt);
+    console.groupEnd('Wyświetlanie obiektu');
+
+    console.groupCollapsed('Wyświetlanie drzewa DOM');
+    console.log("%cconsole.dirxml(document)", cssStyle);
+    console.dirxml(document);
+    console.groupEnd('Wyświetlanie drzewa DOM');
+</script>
+</body>
+</html>

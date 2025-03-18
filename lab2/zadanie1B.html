@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <title>Plik 'zadanie1B.html'</title>
+  <meta charset="UTF-8">
+</head>
+
+<body onLoad="funkcja_zwrotna()">
+<h1>Plik 'zadanie1B.html'</h1>
+<div>Treść dokumentu HTML przed skryptem JS</div>
+<script>
+  function funkcja_zwrotna() {
+    setTimeout(() => {
+      // Ten kod zostanie wykonany po upływie 1000 milisekund (1 sekundy)
+      console.log("<strong>Tekst 1</strong>");
+      window.alert("<strong>Tekst 2</strong>");
+      //document.write("<strong>Tekst 3</strong>");
+    }, 1000);
+  }
+</script>
+<div>Treść dokumentu HTML po skrypcie JS</div>
+</body>
+</html>

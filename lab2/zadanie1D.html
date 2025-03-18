@@ -1,0 +1,22 @@
+<!-- @author Stanisław Polak <polak@agh.edu.pl> -->
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Plik 'zadanie1D.html'</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>Plik 'zadanie1D.html'</h1>
+<script src="zadanie1.js"></script>
+    <form onInput="wynik.value = pole_tekstowe.value + pole_liczbowe.value">
+        <input id="pole_tekstowe" type="text" placeholder="Wprowadź tekst">
+        +
+        <input id="pole_liczbowe" type="number" placeholder="Wprowadź liczbę">
+        =
+        <output name="wynik" for="pole_tekstowe pole_liczbowe">Tu pojawi się wynik obliczeń</output>
+        <br>
+        <input type="button" value="Wypisz" onClick="funkcja_zwrotna()">
+    </form>
+</body>
+</html>
