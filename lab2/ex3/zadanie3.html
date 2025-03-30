@@ -9,13 +9,81 @@
     "use strict";                                       // Nie wyłączaj trybu ścisłego
     document.addEventListener("DOMContentLoaded", () => {
       const canvas = document.getElementById("canvas");
-      const w = 50, h = 50;
       if (canvas.getContext) {
-        const ctx = canvas.getContext('2d');                      // Utworzenie obiektu 'CanvasRenderingContext2D'
-        //ctx.fillText("Hello World", 10, canvas.height / 2);   // Wykreślenie podanego tekstu na płótnie
-        ctx.fillRect(canvas.width / 2 - 30, canvas.height / 2 - 25, w, h);
+        const middlePositions = { middleX : canvas.width / 2, middleY : canvas.height / 2}
+        const circleParameters = {
+          ...middlePositions,
+          r : 30,
+          lineWidth: 10
+        }
+        const rectParameters = {
+          ...middlePositions,
+          width : 55,
+          height : 20,
+          color : "#202020"
+        }
+        const triangleParameters = {
+          x1 : middlePositions.middleX - 64,
+          y1 : middlePositions.middleY + 34,
+          x2 : middlePositions.middleX + 64,
+          y2 : middlePositions.middleY + 34,
+          x3 : middlePositions.middleX,
+          y3 : middlePositions.middleY - 64,
+          lineWidth : 2,
+          color : "black"
+        }
+        const ctx = canvas.getContext('2d');
+
+        const gradient = makeGradient(ctx, circleParameters);
+        drawTriangle(ctx, triangleParameters);
+        drawRectangle(ctx, rectParameters);
+        drawWheel(ctx, gradient, circleParameters);
       }
     });
+
+    function drawRectangle(ctx, p) {
+      ctx.save();
+      ctx.fillStyle = p.color;
+      ctx.fillRect(p.middleX - p.width / 2, p.middleY - p.height / 2, p.width, p.height);
+      ctx.restore();
+    }
+
+    function drawTriangle(ctx, p) {
+      ctx.save();
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = p.lineWidth;
+      ctx.beginPath();
+      ctx.moveTo(p.x1, p.y1);
+      ctx.lineTo(p.x2, p.y2);
+      ctx.lineTo(p.x3, p.y3);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawWheel(ctx, gradient, circleParameters) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.strokeStyle = gradient;
+      ctx.arc(circleParameters.middleX, circleParameters.middleY, circleParameters.r, 0, 2 * Math.PI);
+      ctx.lineWidth = circleParameters.lineWidth;
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    function makeGradient(ctx, circleParameters) {
+      const gradient = ctx.createLinearGradient(
+              circleParameters.middleX - circleParameters.r,
+              circleParameters.middleY - circleParameters.r,
+              circleParameters.middleX + circleParameters.r,
+              circleParameters.middleY + circleParameters.r
+      );
+      gradient.addColorStop(0, "blue");
+      gradient.addColorStop(0.2, "dodgerblue");
+      gradient.addColorStop(0.5, "springgreen");
+      gradient.addColorStop(1, "orangered");
+      return gradient;
+    }
   </script>
 </head>
 <body>

@@ -45,10 +45,8 @@ function letters(s)
     for(const char of s) {
         if (isDigit(char)) continue;
         if(char.toLowerCase() === char) {
-            console.log(char, char.toLowerCase(), "Lowercase");
             lowerCase++;
         } else if(char.toUpperCase() === char) {
-            console.log(char, char.toUpperCase(), "uppercase");
             upperCase++;
         }
     }

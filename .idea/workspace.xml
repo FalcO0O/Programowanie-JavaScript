@@ -5,15 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d6d4d4b-3348-4f42-ac91-78e2e0594bbd" name="Changes" comment="ready for revision">
-      <change afterPath="$PROJECT_DIR$/lab2/ex2/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab2/ex2/zadanie2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab2/ex2/zadanie2.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab2/ex3/zadanie3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/zadanie1.js" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/zadanie1A.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1A.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/zadanie1B.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1B.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/zadanie1C.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1C.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab2/zadanie1D.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1D.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab1/ex4/images/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex4/images/employee.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex4/images/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex4/images/student.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex4/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex4/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex4/usos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab1/ex4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab1/ex4/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/ex2/zadanie2.js" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex2/zadanie2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/ex3/zadanie3.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex3/zadanie3.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,6 +62,7 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Bartek/Documents/GitHub/Programowanie-JavaScript/lab2",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -71,12 +74,15 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab2" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab1\ex4\images" />
       <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab2" />
       <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab2\ex2" />
       <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab2\ex1" />
       <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab1\ex4" />
-      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab1\ex1-2-3" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -97,6 +103,8 @@
       <workItem from="1742047721701" duration="2885000" />
       <workItem from="1742077320476" duration="21215000" />
       <workItem from="1743287903193" duration="7146000" />
+      <workItem from="1743337070851" duration="3357000" />
+      <workItem from="1743360152499" duration="13527000" />
     </task>
     <task id="LOCAL-00001" summary="first save">
       <option name="closed" value="true" />
