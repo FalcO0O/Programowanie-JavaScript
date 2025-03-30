@@ -1,0 +1,29 @@
+<!-- @author Stanisław Polak <polak@agh.edu.pl> -->
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Płótno</title>
+  <script>
+    "use strict";                                       // Nie wyłączaj trybu ścisłego
+    document.addEventListener("DOMContentLoaded", () => {
+      const canvas = document.getElementById("canvas");
+      const w = 50, h = 50;
+      if (canvas.getContext) {
+        const ctx = canvas.getContext('2d');                      // Utworzenie obiektu 'CanvasRenderingContext2D'
+        //ctx.fillText("Hello World", 10, canvas.height / 2);   // Wykreślenie podanego tekstu na płótnie
+        ctx.fillRect(canvas.width / 2 - 30, canvas.height / 2 - 25, w, h);
+      }
+    });
+  </script>
+</head>
+<body>
+<main>
+  <h1>Płótno</h1>
+  <canvas id="canvas" style="border:1px solid #000000;">
+    Wygląda na to, że twoja przeglądarka nie obsługuje elementu "canvas"
+  </canvas>
+</main>
+</body>
+</html>

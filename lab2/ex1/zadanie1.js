@@ -1,5 +1,5 @@
 let input;
-for (let i = 0; i < -1; i++) {
+for (let i = 0; i < 4; i++) {
     input = window.prompt("Tekst1", "Tekst123");
     console.log("Wczytana wartość: " + input, "Typ wczytanej wartości: " + typeof input);
 }

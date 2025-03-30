@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="3d6d4d4b-3348-4f42-ac91-78e2e0594bbd" name="Changes" comment="ready for revision">
+      <change afterPath="$PROJECT_DIR$/lab2/ex2/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex2/zadanie2.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex2/zadanie2.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab2/ex3/zadanie3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/zadanie1.js" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/zadanie1A.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1A.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/zadanie1B.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1B.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/zadanie1C.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1C.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab2/zadanie1D.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab2/ex1/zadanie1D.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;FalcO0O&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/FalcO0O/Programowanie-JavaScript.git&quot;,
+    &quot;accountId&quot;: &quot;4a97ff75-d809-4641-b528-c89fd183188b&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2uM9kgdqUGLoRbP659T8H53RbTv" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab2" />
+      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab2\ex2" />
+      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab2\ex1" />
+      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab1\ex4" />
+      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab1\ex1-2-3" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-WS-242.23339.15" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="3d6d4d4b-3348-4f42-ac91-78e2e0594bbd" name="Changes" comment="" />
+      <created>1742047720575</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742047720575</updated>
+      <workItem from="1742047721701" duration="2885000" />
+      <workItem from="1742077320476" duration="21215000" />
+      <workItem from="1743287903193" duration="7146000" />
+    </task>
+    <task id="LOCAL-00001" summary="first save">
+      <option name="closed" value="true" />
+      <created>1742082440934</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1742082440934</updated>
+    </task>
+    <task id="LOCAL-00002" summary="ready for revision">
+      <option name="closed" value="true" />
+      <created>1742099278726</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1742099278726</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first save" />
+    <MESSAGE value="ready for revision" />
+    <option name="LAST_COMMIT_MESSAGE" value="ready for revision" />
+  </component>
+</project>

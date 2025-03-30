@@ -1,0 +1,34 @@
+<!-- @author Stanisław Polak <polak@agh.edu.pl> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>
+    Mocha tests
+  </title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mocha/mocha.css">
+</head>
+
+<body>
+<div id="mocha"></div>
+<script src="zadanie2.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mocha/mocha.js"></script>
+<script type="module">
+  import { should } from 'https://cdn.jsdelivr.net/npm/chai/chai.js';
+  import { test_sum } from "./zadanie2.test.js"
+  import { test_string_operations } from "./zadanie2.test.js"
+  should();
+  mocha.setup('bdd');
+  mocha.checkLeaks();
+  // Początek bloku wywołań funkcji testujących
+  test_sum();
+  test_string_operations()
+  // Koniec bloku wywołań funkcji testujących
+  mocha.run();
+</script>
+</body>
+
+</html>
