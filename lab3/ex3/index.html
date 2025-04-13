@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>Animation</title>
+</head>
+<body>
+<div id="root"></div>
+<form onsubmit="event.preventDefault();">
+  <h2>requestAnimationFrame()</h2>
+  <label for="counter">Counter→</label>
+  <output id="counter" style="font-size: 4vh; color: red;">0</output>
+  <br>
+  <button id="start">Start</button>
+  <button id="stop" disabled>Stop</button>
+  <!-- ************************************************************** -->
+  <hr>
+  <h2>Time-consuming calculations in the main thread</h2>
+  <label for="result_main">Result:</label>
+  <output id="result_main">0</output>
+  <br>
+  <label for="iterations_main">Number of iterations:</label>
+  <input
+          id="iterations_main"
+          type="text"
+          value="50"
+          onfocus="document.getElementById('result_main').value = '0'"
+  >
+  <button id="calc_main">Run calculations</button>
+  <!-- ************************************************************** -->
+  <h2>Time-consuming calculations in a separate thread</h2>
+  <label for="result_worker">Result:</label>
+  <output id="result_worker">0</output>
+  <br>
+  <label for="iterations_worker">Number of iterations:</label>
+  <input
+          id="iterations_worker"
+          type="text"
+          value="50"
+          onfocus="document.getElementById('result_worker').value = '0'"
+  >
+  <!-- Dodano id do przycisku -->
+  <button id="calc_worker">Run calculations</button>
+</form>
+
+<!-- Skrypt React oraz dodatkowe funkcje -->
+<script type="text/babel" data-type="module">
+  import React from "https://esm.sh/react/?dev";
+  import ReactDOMClient from "https://esm.sh/react-dom/client/?dev";
+
+  function Counter(props) {
+    const [count, setCount] = React.useState(Number(props.initial));
+    // Referencja do id interwału – pozwala na zatrzymanie
+    const timerRef = React.useRef(null);
+
+    // Funkcja start – ustawia interwał co props.delay ms, aby zwiększać licznik
+    const start = () => {
+      if (!timerRef.current) {
+        timerRef.current = setInterval(() => {
+          setCount(prevCount => prevCount + 1);
+        }, Number(props.delay));
+      }
+    };
+
+    // Funkcja stop – czyści interwał
+    const stop = () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+
+    return (
+            <div style={{ backgroundColor: "green", borderRadius: 5, padding: "10px", margin: "10px" }}>
+              <div>
+                <p>
+                  Counter → <span style={{ color: "red" }}>{count}</span>
+                </p>
+              </div>
+              <div>
+                <button onClick={start}>Start</button>
+                <button onClick={stop}>Stop</button>
+              </div>
+            </div>
+    );
+  }
+
+  // Renderowanie dwóch liczników wewnątrz kontenera #root
+  const container = document.getElementById("root");
+  const root = ReactDOMClient.createRoot(container);
+  root.render(
+          <>
+            <Counter initial="10" delay="1000" />
+            <Counter initial="15" delay="500" />
+          </>
+  );
+
+  let animation;
+  let counter = 0;
+
+  function calculatePrimes(iterations) {
+    let primes = [];
+    for (let i = 0; i < iterations; i++) {
+      let candidate = i * (1000000000 * Math.random());
+      let isPrime = true;
+      for (var c = 2; c <= Math.sqrt(candidate); ++c) {
+        if (candidate % c === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+      if (isPrime) {
+        primes.push(candidate);
+      }
+    }
+    return primes;
+  }
+
+  function calculatePrimesInBackground(iterations) {
+    try {
+      let worker = new Worker("worker.js");
+      worker.onmessage = function (message) {
+        document.getElementById("result_worker").value = message.data;
+      };
+      worker.onerror = (event) => {
+        alert(event.message);
+      };
+      worker.postMessage(iterations);
+    } catch (e) {
+      console.error("Worker failed to start:", e);
+    }
+  }
+
+  // Funkcje do obsługi requestAnimationFrame
+  function startAnimation() {
+    document.getElementById("start").disabled = true;
+    document.getElementById("stop").disabled = false;
+    animation = window.requestAnimationFrame(step);
+  }
+
+  function step() {
+    document.getElementById("counter").value = counter++;
+    animation = window.requestAnimationFrame(step);
+  }
+
+  function stopAnimation() {
+    document.getElementById("start").disabled = false;
+    document.getElementById("stop").disabled = true;
+    window.cancelAnimationFrame(animation);
+  }
+
+  // Zamiast inline event handlerów, podpinamy zdarzenia do elementów
+  document.getElementById("start").addEventListener("click", (e) => {
+    e.preventDefault();
+    startAnimation();
+  });
+
+  document.getElementById("stop").addEventListener("click", (e) => {
+    e.preventDefault();
+    stopAnimation();
+  });
+
+  document.getElementById("calc_main").addEventListener("click", (e) => {
+    e.preventDefault();
+    const iterations = document.getElementById("iterations_main").value || 50;
+    document.getElementById("result_main").value = calculatePrimes(iterations);
+  });
+
+  document.getElementById("calc_worker").addEventListener("click", (e) => {
+    e.preventDefault();
+    const iterations = document.getElementById("iterations_worker").value || 50;
+    calculatePrimesInBackground(iterations);
+  });
+</script>
+</body>
+</html>

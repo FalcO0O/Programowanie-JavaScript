@@ -1,0 +1,35 @@
+<!-- @author Stanisław Polak <polak@agh.edu.pl> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>
+    Example 2
+  </title>
+</head>
+<body>
+<div id="root">
+  <!--
+      Container for the component.
+      React renders the specified HTML code inside the so-called container,
+      i.e. the element of the website we choose.
+  -->
+</div>
+<!-- The 'Hello' component-->
+<script type="text/babel" data-type="module">
+  import React from "https://esm.sh/react/?dev";
+  import ReactDOMClient from "https://esm.sh/react-dom/client/?dev";
+
+  // Component logic
+  function Hello(props){
+    {/* Displaying data passed via the 'welcome' property */ }
+    return <h1>{props.welcome}</h1>;
+  }
+
+  const container = document.getElementById('root'); // Retrieving references per container
+  const root = ReactDOMClient.createRoot(container); // Creating a React root for the given container
+  root.render(<Hello welcome="Hello World" />);      // Component rendering
+</script>
+</body>
+</html>

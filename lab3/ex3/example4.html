@@ -1,0 +1,62 @@
+<!-- @author Stanisław Polak <polak@agh.edu.pl> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <title>
+    Example 4
+  </title>
+</head>
+<body>
+<div id="root">
+  <!--
+      Container for the component.
+      React renders the specified HTML code inside the so-called container,
+      i.e. the element of the website we choose.
+  -->
+</div>
+<!--
+    Communication between 'EchoInput' and 'EchoOutput' components.
+    In order for them to communicate, we need to create a parent component, here "Echo" — it will store data
+-->
+<script type="text/babel" data-type="module">
+  import React from "https://esm.sh/react/?dev";
+  import ReactDOMClient from "https://esm.sh/react-dom/client/?dev";
+
+  // The 'Echo' component
+  function Echo () {
+    // Stored data — text entered in the HTML form text field
+    const [text, setText] = React.useState('');
+
+    return (
+            <>
+              <EchoInput
+                      text={text}
+                      setText={setText} />
+              <EchoOutput text={text} />
+            </>
+    );
+  }
+
+  // The 'EchoInput' component — responsible for loading data from HTML form -->
+  function EchoInput(props) {
+    //  When I enter a new character in '<input>', the 'Change' event is generated
+    return (
+            <input value={props.text}
+                   onChange ={(e) => props.setText(e.target.value)} />
+    );
+  }
+
+  // The 'EchoOutput' component — responsible for writing out the loaded data -->
+  function EchoOutput(props) {
+    // The 'EchoOutput' component receives the passed value (the 'text' variable), from the 'Echo' component, using the 'props' object
+    return <div>Output: {props.text} </div>;
+  }
+
+  const container = document.getElementById('root'); // Retrieving references per container
+  const root = ReactDOMClient.createRoot(container); // Creating a React root for the given container
+  root.render(<Echo  />);                            // Component rendering
+</script>
+</body>
+</html>
