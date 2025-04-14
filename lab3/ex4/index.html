@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wydział Informatyki</title>
+  <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+  />
+  <style>
+    .secondary-color {
+      background-color: #d9e5f7;
+    }
+    .margin {
+      margin: 0 100px;
+    }
+    .email {
+      display: block;
+      width: 100%;
+    }
+    @media screen and (max-width: 768px) {
+      .margin {
+        margin: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body class="margin">
+
+<!-- navbar -->
+<nav class="navbar secondary-color" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item has-text-weight-bold" href="#">
+      <img class = "icon-image" src="images/icon.png" alt="icon" style="width: 100px; height: auto;"/>
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="mainNavbar">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+
+  <div id="mainNavbar" class="navbar-menu secondary-color">
+    <div class="navbar-start">
+      <a class="navbar-item" href="#">
+        Studia stacjonarne
+      </a>
+      <a class="navbar-item" href="#">
+        Studia niestacjonarne
+      </a>
+      <a class="navbar-item" href="#">
+        Pracownicy
+      </a>
+    </div>
+
+    <div class="navbar-end">
+      <a class="navbar-item has-text-weight-bold" href="usos.html">
+        USOS
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- main content -->
+<section class="section">
+  <h1 class="title">Wydział Informatyki</h1>
+
+  <div class="columns is-multiline">
+    <div class="column is-one-third-desktop">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Jan Kowalski
+          </p>
+        </header>
+        <div class="card-content has-text-centered">
+          <figure class="image is-256x256 is-inline-block">
+            <img src="images/employee.jpg" alt="Pracownik">
+          </figure>
+          <p class="subtitle mt-3">Pracownik</p>
+          <p class="subtitle">Karta 1</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-one-third-desktop">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Anna Nowak
+          </p>
+        </header>
+        <div class="card-content has-text-centered">
+          <figure class="image is-256x256 is-inline-block">
+            <img src="images/student.jpg" alt="Studentka">
+          </figure>
+          <p class="title is-6 mt-3">Informatyka – Uczenie Maszynowe i Sztuczna Inteligencja</p>
+          <p class="subtitle">Studentka</p>
+          <p class="subtitle">Karta 2</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="column is-one-third-desktop">
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Jerzy Zmuda
+          </p>
+        </header>
+        <div class="card-content has-text-centered">
+          <figure class="image is-256x256 is-inline-block">
+            <img src="images/employee.jpg" alt="Student">
+          </figure>
+          <p class="title is-6 mt-3">Informatyka – Data Science</p>
+          <p class="subtitle">Student</p>
+          <p class="subtitle">Karta 3</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Email address -->
+  <a href="mailto:your.email.address"  class="is-link mt-2 secondary-color email">Adres email</a>
+</section>
+
+<!-- kod odpowiadający za działanie hamburgerka -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const burger = document.querySelector('.navbar-burger');
+    const menu = document.querySelector('#mainNavbar');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    });
+  });
+</script>
+
+</body>
+</html>

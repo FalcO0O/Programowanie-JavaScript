@@ -5,16 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d6d4d4b-3348-4f42-ac91-78e2e0594bbd" name="Changes" comment="ready for revision">
-      <change afterPath="$PROJECT_DIR$/lab3/ex1/worker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex2/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex3/example1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex3/example2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex3/example3.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex3/example4.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex3/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/ex3/worker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/ex4/images/employee.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/ex4/images/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/ex4/images/student.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/ex4/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/ex4/script.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lab3/ex4/usos.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab1/ex4/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab1/ex4/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab3/ex1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab3/ex1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab3/ex1/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lab3/ex3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab3/ex3/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +75,7 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab3\ex3" />
+      <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab3" />
       <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab3\ex2" />
       <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab2" />
     </key>
@@ -106,7 +107,7 @@
       <workItem from="1743287903193" duration="7146000" />
       <workItem from="1743337070851" duration="3357000" />
       <workItem from="1743360152499" duration="13527000" />
-      <workItem from="1744570462098" duration="13873000" />
+      <workItem from="1744570462098" duration="20542000" />
     </task>
     <task id="LOCAL-00001" summary="first save">
       <option name="closed" value="true" />

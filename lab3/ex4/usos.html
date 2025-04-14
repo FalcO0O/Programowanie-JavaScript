@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>USOS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <style>
+        .card.not-assigned { background-color: #f0f0f0; }
+        .card.assigned { background-color: #ffffff; }
+        .grade-list { margin-top: 10px; }
+        .grade-form { display: none; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<section class="section">
+    <h1 class="title">USOS</h1>
+    <div id="cards-container" class="columns is-multiline">
+        <!--    Jan Kowalski -->
+        <div id="card-jan-kowalski" class="column is-one-third-desktop">
+            <div class="card not-assigned">
+                <header class="card-header">
+                    <p class="card-header-title">Jan Kowalski</p>
+                </header>
+                <div class="card-content">
+                    <figure class="image is-128x128">
+                        <img src="images/student.jpg" alt="Student">
+                    </figure>
+                    <div class="grade-list">Brak ocen</div>
+                    <div class="grade-form">
+                        <div class="field">
+                            <label class="label">Przedmiot</label>
+                            <div class="control">
+                                <input class="input subject-input" type="text" placeholder="wpisz przedmiot">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Ocena</label>
+                            <div class="control">
+                                <input class="input grade-input" type="text" placeholder="wpisz ocenę">
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link save-grade">zapisz ocenę</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Anna Nowak -->
+        <div id="card-anna-nowak" class="column is-one-third-desktop">
+            <div class="card not-assigned">
+                <header class="card-header">
+                    <p class="card-header-title">Anna Nowak</p>
+                </header>
+                <div class="card-content">
+                    <figure class="image is-128x128">
+                        <img src="images/student.jpg" alt="Student">
+                    </figure>
+                    <div class="grade-list">Brak ocen</div>
+                    <div class="grade-form">
+                        <div class="field">
+                            <label class="label">Przedmiot</label>
+                            <div class="control">
+                                <input class="input subject-input" type="text" placeholder="wpisz przedmiot">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Ocena</label>
+                            <div class="control">
+                                <input class="input grade-input" type="text" placeholder="wpisz ocenę">
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link save-grade">zapisz ocenę</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Piotr Duda -->
+        <div id="card-piotr-duda" class="column is-one-third-desktop">
+            <div class="card not-assigned">
+                <header class="card-header">
+                    <p class="card-header-title">Piotr Duda</p>
+                </header>
+                <div class="card-content">
+                    <figure class="image is-128x128">
+                        <img src="images/student.jpg" alt="Student">
+                    </figure>
+                    <div class="grade-list">Brak ocen</div>
+                    <div class="grade-form">
+                        <div class="field">
+                            <label class="label">Przedmiot</label>
+                            <div class="control">
+                                <input class="input subject-input" type="text" placeholder="wpisz przedmiot">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Ocena</label>
+                            <div class="control">
+                                <input class="input grade-input" type="text" placeholder="wpisz ocenę">
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link save-grade">zapisz ocenę</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="script.js"></script>
+</body>
+</html>

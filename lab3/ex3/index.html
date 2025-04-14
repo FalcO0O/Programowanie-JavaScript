@@ -41,21 +41,18 @@
           value="50"
           onfocus="document.getElementById('result_worker').value = '0'"
   >
-  <!-- Dodano id do przycisku -->
   <button id="calc_worker">Run calculations</button>
 </form>
 
-<!-- Skrypt React oraz dodatkowe funkcje -->
 <script type="text/babel" data-type="module">
   import React from "https://esm.sh/react/?dev";
   import ReactDOMClient from "https://esm.sh/react-dom/client/?dev";
 
   function Counter(props) {
     const [count, setCount] = React.useState(Number(props.initial));
-    // Referencja do id interwału – pozwala na zatrzymanie
+    // Referencja do id interwału
     const timerRef = React.useRef(null);
 
-    // Funkcja start – ustawia interwał co props.delay ms, aby zwiększać licznik
     const start = () => {
       if (!timerRef.current) {
         timerRef.current = setInterval(() => {
@@ -64,7 +61,6 @@
       }
     };
 
-    // Funkcja stop – czyści interwał
     const stop = () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -87,7 +83,6 @@
     );
   }
 
-  // Renderowanie dwóch liczników wewnątrz kontenera #root
   const container = document.getElementById("root");
   const root = ReactDOMClient.createRoot(container);
   root.render(

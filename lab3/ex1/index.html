@@ -1,4 +1,5 @@
 <!-- @author Stanisław Polak <polak@agh.edu.pl> -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,12 +7,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animation</title>
-  <!-- Dodajemy Babel, jeśli chcemy obsługę JSX, ale nie modyfikujemy oryginalnego skryptu -->
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 
 <body>
-<div id="react-root"></div>
 <form onsubmit="event.preventDefault();">
   <h2>requestAnimationFrame()</h2>
   <label for="counter">Counter→</label>
@@ -96,54 +94,6 @@
     document.forms[0].stop.disabled = true;
     window.cancelAnimationFrame(animation)
   }
-</script>
-
-<script type="text/babel" data-type="module">
-  import React from "https://esm.sh/react/?dev";
-  import ReactDOMClient from "https://esm.sh/react-dom/client/?dev";
-
-  function Counter(props) {
-    const [count, setCount] = React.useState(Number(props.initial) || 0);
-    const timerRef = React.useRef(null);
-
-    const start = () => {
-      if (!timerRef.current) {
-        timerRef.current = setInterval(() => {
-          setCount(prev => prev + 1);
-        }, Number(props.delay));
-      }
-    };
-
-    const stop = () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-
-    return (
-            <div style={{ backgroundColor: "green", borderRadius: 5, padding: "10px", margin: "10px" }}>
-              <div>
-                <p>
-                  Counter → <span style={{ color: "red" }}>{count}</span>
-                </p>
-              </div>
-              <div>
-                <button onClick={start}>Start</button>
-                <button onClick={stop}>Stop</button>
-              </div>
-            </div>
-    );
-  }
-
-  const container = document.getElementById("react-root");
-  const root = ReactDOMClient.createRoot(container);
-  root.render(
-          <>
-            <Counter initial="10" delay="1000" />
-            <Counter initial="15" delay="500" />
-          </>
-  );
 </script>
 </body>
 </html>
