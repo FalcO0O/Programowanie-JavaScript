@@ -5,16 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3d6d4d4b-3348-4f42-ac91-78e2e0594bbd" name="Changes" comment="ready for revision">
-      <change afterPath="$PROJECT_DIR$/lab3/ex3/worker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex4/images/employee.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex4/images/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex4/images/student.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex4/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex4/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lab3/ex4/usos.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab3/ex1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab3/ex1/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lab3/ex3/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/lab3/ex3/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,22 +47,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/Bartek/Documents/GitHub/Programowanie-JavaScript/lab3/ex3",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "advanced.settings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Bartek/Documents/GitHub/Programowanie-JavaScript/lab3/ex3&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab3\ex3" />
@@ -107,7 +98,9 @@
       <workItem from="1743287903193" duration="7146000" />
       <workItem from="1743337070851" duration="3357000" />
       <workItem from="1743360152499" duration="13527000" />
-      <workItem from="1744570462098" duration="20542000" />
+      <workItem from="1744570462098" duration="20775000" />
+      <workItem from="1744592800053" duration="17000" />
+      <workItem from="1746656655248" duration="136000" />
     </task>
     <task id="LOCAL-00001" summary="first save">
       <option name="closed" value="true" />
