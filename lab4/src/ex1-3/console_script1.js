@@ -21,7 +21,7 @@ function read_async() {
     console.log(`1.\t\x1B[33mWykonano pierwszą linię funkcji "read_async()"\x1B[0m`);
     console.log('2.\t\x1B[33mWywołano funkcję \'readFile()\'\x1B[0m');
     console.time('\tCzas wykonania "readFile()"');
-    fs.readFile(argv[1], (err, data) => {
+    fs.readFile(argv[1], (err) => {
         if (err) throw err;
         console.log('3.\t\x1B[33mWczytana zawartość pliku jest dostępna w zmiennej \'data\'\x1B[0m');
     });
@@ -33,7 +33,7 @@ function read_sync() {
     console.log(`5.\t\x1B[32mWykonano pierwszą linię funkcji "read_sync()"\x1B[0m`);
     console.log('6.\t\x1B[32mWywołano funkcję \'readFileSync()\'\x1B[0m');
     console.time('\tCzas wykonania "readFileSync()"');
-    let data = fs.readFileSync(argv[1]);
+    fs.readFileSync(argv[1]);
     console.timeEnd('\tCzas wykonania "readFileSync()"');
     console.log('7.\t\x1B[32mWczytana zawartość pliku jest dostępna w zmiennej \'data\'\x1B[0m');
     console.log(`8.\t\x1B[32mWykonano ostatnią linię funkcji "read_sync()"\x1B[0m`);
