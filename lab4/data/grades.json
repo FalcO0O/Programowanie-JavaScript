@@ -1,0 +1,37 @@
+[
+  {
+    "student": "jan kowalski",
+    "subject": "matematyka",
+    "grade": "5"
+  },
+  {
+    "student": "jan kowalski",
+    "subject": "javascript",
+    "grade": "4"
+  },
+  {
+    "student": "anna nowak",
+    "subject": "fizyka",
+    "grade": "6"
+  },
+  {
+    "student": "anna nowak",
+    "subject": "informatyka",
+    "grade": "5"
+  },
+  {
+    "student": "piotr duda",
+    "subject": "matematyka",
+    "grade": "3"
+  },
+  {
+    "student": "piotr duda",
+    "subject": "fizyka",
+    "grade": "4"
+  },
+  {
+    "student": "jan kowalski",
+    "subject": "fizyka",
+    "grade": "3"
+  }
+]
