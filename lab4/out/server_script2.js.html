@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: server_script2.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: server_script2.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * @file Guestbook server using Node.js and plain HTML.
+ * @author Bartosz Ludwin
+ */
+
+import http from 'http';
+import fs from 'fs';
+import path from 'path';
+import { URLSearchParams } from 'url';
+
+const HOST = 'localhost';
+const PORT = 8000;
+const DATA_FILE = path.resolve('data/guestbook.txt');
+
+if (!fs.existsSync(DATA_FILE)) {
+  fs.writeFileSync(DATA_FILE, '', 'utf-8');
+}
+
+/**
+ * Parses raw file content into structured guestbook entries.
+ * @param {string} raw - Raw string data from the file.
+ * @returns {Array&lt;{name: string, message: string}>} Array of parsed entries.
+ */
+function parseEntries(raw) {
+    return raw
+      .trim()
+      .split('\n\n')
+      .filter(block => block.length)
+      .map(block => {
+        const [name, ...rest] = block.split('\n');
+        return { name, message: rest.join('\n') };
+      });
+  }
+  
+  /**
+   * Generates an HTML page containing the guestbook entries and form.
+   * @param {Array&lt;{name: string, message: string}>} entries - List of guestbook entries.
+   * @returns {string} HTML string.
+   */
+  function renderPage(entries) {
+    const entriesHtml = entries.map(e => `
+      &lt;div class="entry">
+        &lt;h3>${e.name}&lt;/h3>
+        &lt;p>${e.message.replace(/\n/g, '&lt;br>')}&lt;/p>
+      &lt;/div>
+    `).join('\n');
+  
+    return `&lt;!DOCTYPE html>
+  &lt;html lang="pl">
+  &lt;head>
+    &lt;meta charset="UTF-8">
+    &lt;title>Księga gości&lt;/title>
+    &lt;style>
+      body { font-family: sans-serif; margin: 2rem; }
+      .entry { margin-bottom: 1.5rem; padding-bottom: .5rem; border-bottom: 1px solid #ccc; }
+      form { margin-top: 2rem; }
+      label { display: block; margin-top: 1rem; }
+      input[type="text"], textarea { width: 100%; padding: .5rem; }
+      button { margin-top: 1rem; padding: .5rem 1rem; }
+    &lt;/style>
+  &lt;/head>
+  &lt;body>
+    &lt;h1>Księga gości&lt;/h1>
+  
+    &lt;!-- Poprzednie wpisy -->
+    ${entriesHtml || '&lt;p>Brak wpisów.&lt;/p>'}
+  
+    &lt;!-- Formularz -->
+    &lt;form method="POST" action="/submit">
+      &lt;label>
+        Imię i nazwisko:&lt;br>
+        &lt;input type="text" name="name" required>
+      &lt;/label>
+      &lt;label>
+        Treść wpisu:&lt;br>
+        &lt;textarea name="message" rows="5" required>&lt;/textarea>
+      &lt;/label>
+      &lt;button type="submit">Wyślij&lt;/button>
+    &lt;/form>
+  &lt;/body>
+  &lt;/html>`;
+  }
+  
+  /**
+   * HTTP server instance handling guestbook operations.
+   * @param {http.IncomingMessage} req - The incoming HTTP request.
+   * @param {http.ServerResponse} res - The HTTP response to send back.
+   */
+  const server = http.createServer((req, res) => {
+    if (req.method === 'GET' &amp;&amp; req.url === '/') {
+      fs.readFile(DATA_FILE, 'utf-8', (err, raw) => {
+        if (err) {
+          res.writeHead(500);
+          return res.end('Błąd serwera');
+        }
+        const entries = parseEntries(raw);
+        res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+        res.end(renderPage(entries));
+      });
+  
+    } else if (req.method === 'POST' &amp;&amp; req.url === '/submit') {
+      let body = '';
+      req.on('data', chunk => body += chunk);
+      req.on('end', () => {
+        const params = new URLSearchParams(body);
+        const name    = (params.get('name')    || '').trim();
+        const message = (params.get('message') || '').trim();
+        
+        if (name &amp;&amp; message) {
+          const entryBlock = `${name}\n${message}\n\n`;
+          fs.appendFile(DATA_FILE, entryBlock, 'utf-8', err => {
+            if (err) console.error('Błąd zapisu:', err);
+            res.writeHead(302, { Location: '/' });
+            res.end();
+          });
+        } else {
+          res.writeHead(400);
+          res.end('Brakuje imienia lub treści wpisu.');
+        }
+      });
+  
+    } else {
+      res.writeHead(404);
+      res.end('Nie znaleziono');
+    }
+  });
+  
+  // Start server
+  server.listen(PORT, HOST, () => {
+    console.log(`Serwer działa: http://${HOST}:${PORT}/`);
+  });</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#parseEntries">parseEntries</a></li><li><a href="global.html#renderPage">renderPage</a></li><li><a href="global.html#requestListener">requestListener</a></li><li><a href="global.html#server">server</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Mon May 12 2025 01:28:15 GMT+0200 (czas środkowoeuropejski letni)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
