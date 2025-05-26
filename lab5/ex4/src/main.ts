@@ -25,14 +25,13 @@ const controller = new StudentController(dbService);
 
 app.use(async (ctx, next) => {
   await next();
-  ctx.response.headers.set("X-Frame-Options", "DENY");
   ctx.response.headers.set("Content-Security-Policy", csp);
 });
 
-// CORS protection middleware
+// CORS middleware
 app.use(async (ctx, next) => {
   const origin = ctx.request.headers.get("Origin");
-  const allowedOrigin = `http://localhost:${PORT}`;  // or read from config/env
+  const allowedOrigin = `http://localhost:${PORT}`; 
 
   if (origin && origin === allowedOrigin) {
     // Set only the one origin you trust
@@ -62,7 +61,6 @@ app.use(async (ctx, next) => {
     ctx.response.body = "Forbidden: invalid CORS origin";
     return;
   }
-
   await next();
 });
 
@@ -82,7 +80,7 @@ app.use(async (ctx, next) => {
       sameSite: "strict",
     });
   }
-  // przechowujemy w stanie kontekstu
+  // przechowujemy w stanie
   ctx.state.csrf = token;
   await next();
 });

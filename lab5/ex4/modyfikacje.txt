@@ -1,6 +1,6 @@
 Snyk:
 
-Nie zrobiłem żadnych zmian, od razu miałem taki komunikat:
+Od razu miałem taki komunikat, więc nie zrobiłem żadnych zmian:
 
 ✔ Test completed
 
@@ -24,51 +24,23 @@ sprawdzanie tokenu w "/usos/add"
 
 2. Content Security Policy (CSP) Header Not Set
 Dodanie: 
+const csp = [
+  "default-src 'none'",
+  "script-src 'self'",
+  "style-src 'self'",
+  "img-src 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
+
 app.use(async (ctx, next) => {
   await next();
-  ctx.response.headers.set("X-Frame-Options", "DENY");
-  ctx.response.headers.set("Content-Security-Policy", "default-src 'self'");
+  ctx.response.headers.set("Content-Security-Policy", csp);
 });
-
-
-CSP: Failure to Define Directive with No Fallback
-modyfikacja powyższego na:
-ctx.response.headers.set(
-    "Content-Security-Policy",
-    [
-        // fallback dla wszystkiego, co nie zostało wypisane niżej
-        "default-src 'none'",
-
-        // skrypty mogą pochodzić tylko z Twojej domeny
-        "script-src 'self'",
-
-        // style: lokalnie oraz z jsdelivr
-        "style-src 'self' https://cdn.jsdelivr.net",
-
-        // obrazki tylko z lokalnego serwera
-        "img-src 'self'",
-
-        // do fetchy/AJAX-ów (jeśli kiedyś będziesz ich używać)
-        // "connect-src 'self'",
-
-        // fonty, jeśli potrzebujesz
-        // "font-src 'self'",
-
-        // zabroń w ogóle wstrzykiwania pluginów
-        "object-src 'none'",
-
-        // uniemożliw ramkom osadzanie Twojej apki
-        "frame-ancestors 'none'",
-
-        // tylko własna domena może być base href
-        "base-uri 'self'",
-
-        // formularze tylko do Twojej domeny
-        "form-action 'self'",
-    ].join("; ")
-    );
 
 
 Cross-Domain Misconfiguration
 (z url: https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css)
-pobranie pliku i hostowanie go na serwerze lokalnym, zamiast poleganie na api
+pobranie pliku i hostowanie go na serwerze lokalnym, zamiast polegania na api
