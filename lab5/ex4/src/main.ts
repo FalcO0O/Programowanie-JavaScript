@@ -3,6 +3,7 @@ import logger from "https://deno.land/x/oak_logger/mod.ts";
 import { Eta } from "https://deno.land/x/eta/src/index.ts";
 import { DatabaseService } from "./db.ts";
 import { StudentController } from "./controller.ts";
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
 
 const PORT = 8000;
 const app = new Application();
@@ -29,40 +30,11 @@ app.use(async (ctx, next) => {
 });
 
 // CORS middleware
-app.use(async (ctx, next) => {
-  const origin = ctx.request.headers.get("Origin");
-  const allowedOrigin = `http://localhost:${PORT}`; 
-
-  if (origin && origin === allowedOrigin) {
-    // Set only the one origin you trust
-    ctx.response.headers.set("Access-Control-Allow-Origin", allowedOrigin);
-    ctx.response.headers.set("Vary", "Origin");
-
-    // Allow these methods and headers for preflighted requests
-    ctx.response.headers.set(
-      "Access-Control-Allow-Methods",
-      "GET, POST, OPTIONS"
-    );
-    ctx.response.headers.set(
-      "Access-Control-Allow-Headers",
-      "Content-Type, X-CSRF-Token"
-    );
-    // If you need credentials (cookies, auth), enable this:
-    // ctx.response.headers.set("Access-Control-Allow-Credentials", "true");
-
-    // Handle preflight requests right here
-    if (ctx.request.method === "OPTIONS") {
-      ctx.response.status = 204; // No Content
-      return;
-    }
-  } else if (origin) {
-    // Bad origin → block
-    ctx.response.status = 403;
-    ctx.response.body = "Forbidden: invalid CORS origin";
-    return;
-  }
-  await next();
-});
+app.use(oakCors({
+  origin: `http://localhost:${PORT}`,
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "X-CSRF-Token"]
+}));
 
 
 app.use(logger.logger);

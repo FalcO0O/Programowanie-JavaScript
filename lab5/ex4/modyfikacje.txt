@@ -24,23 +24,13 @@ sprawdzanie tokenu w "/usos/add"
 
 2. Content Security Policy (CSP) Header Not Set
 Dodanie: 
-const csp = [
-  "default-src 'none'",
-  "script-src 'self'",
-  "style-src 'self'",
-  "img-src 'self'",
-  "object-src 'none'",
-  "frame-ancestors 'none'",
-  "base-uri 'self'",
-  "form-action 'self'",
-].join("; ");
+app.use(oakCors({
+  origin: `http://localhost:${PORT}`,
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "X-CSRF-Token"],
+  credentials: true,  // jeśli potrzebujesz, by przeglądarka wysyłała ciasteczka
+}));
 
-app.use(async (ctx, next) => {
-  await next();
-  ctx.response.headers.set("Content-Security-Policy", csp);
-});
-
-
-Cross-Domain Misconfiguration
+3. Cross-Domain Misconfiguration
 (z url: https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css)
-pobranie pliku i hostowanie go na serwerze lokalnym, zamiast polegania na api
+pobranie pliku i hostowanie go na serwerze lokalnym zamiast polegania na api
