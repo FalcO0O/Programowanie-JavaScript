@@ -31,8 +31,8 @@ const eta = new Eta({ views: `${Deno.cwd()}/views` });
 router.get("/:faculty", async (ctx) => {
   console.log("Searching for:");
   console.log(ctx.params.faculty);
-  const html = await eta.render("app3.eta", { persons: students.filter((s) => s.faculty === ctx.params.faculty) });
-
+  const html = await eta.render("app3.eta", { persons: students.filter((s) => s.faculty.toLocaleLowerCase() === ctx.params.faculty.toLocaleLowerCase()) });
+  console.log(students, ctx.params);
   ctx.response.headers.set("Content-Type", "text/html; charset=utf-8");
   ctx.response.body = html;
 }).get("/", async (ctx: Context) => {
