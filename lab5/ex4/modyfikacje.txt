@@ -1,0 +1,11 @@
+Nie zrobiłem żadnych zmian, od razu miałem taki komunikat:
+
+✔ Test completed
+
+Organization:      falco0o
+Test type:         Static code analysis
+Project path:      C:\Users\Bartek\Documents\GitHub\Programowanie-JavaScript\lab5
+
+Summary:
+
+✔ Awesome! No issues were found.

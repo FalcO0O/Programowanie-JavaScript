@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lista studentów</title>
+  <style>
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #666; padding: 8px; text-align: left; }
+    th { background: #eee; }
+  </style>
+</head>
+<body>
+  <h1>Lista studentów</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Nazwisko</th>
+        <th>Imię</th>
+        <th>Wydział</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% it.persons.forEach(function(person) { %>
+        <tr>
+          <td><%= person.lname %></td>
+          <td><%= person.fname %></td>
+          <td><%= person.faculty %></td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+</body>
+</html>
