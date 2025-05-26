@@ -4,14 +4,88 @@ import { Eta } from "https://deno.land/x/eta/src/index.ts";
 import { DatabaseService } from "./db.ts";
 import { StudentController } from "./controller.ts";
 
-const PORT = 8080;
+const PORT = 8000;
 const app = new Application();
 const router = new Router();
 const eta = new Eta({ views: `${Deno.cwd()}/views` });
+const csp = [
+  "default-src 'none'",
+  "script-src 'self'",
+  "style-src 'self'",
+  "img-src 'self'",
+  "object-src 'none'",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+].join("; ");
 
 const dbService = new DatabaseService("mongodb://127.0.0.1:27017", "AGH", "ex4");
 await dbService.connect();
 const controller = new StudentController(dbService);
+
+app.use(async (ctx, next) => {
+  await next();
+  ctx.response.headers.set("X-Frame-Options", "DENY");
+  ctx.response.headers.set("Content-Security-Policy", csp);
+});
+
+// CORS protection middleware
+app.use(async (ctx, next) => {
+  const origin = ctx.request.headers.get("Origin");
+  const allowedOrigin = `http://localhost:${PORT}`;  // or read from config/env
+
+  if (origin && origin === allowedOrigin) {
+    // Set only the one origin you trust
+    ctx.response.headers.set("Access-Control-Allow-Origin", allowedOrigin);
+    ctx.response.headers.set("Vary", "Origin");
+
+    // Allow these methods and headers for preflighted requests
+    ctx.response.headers.set(
+      "Access-Control-Allow-Methods",
+      "GET, POST, OPTIONS"
+    );
+    ctx.response.headers.set(
+      "Access-Control-Allow-Headers",
+      "Content-Type, X-CSRF-Token"
+    );
+    // If you need credentials (cookies, auth), enable this:
+    // ctx.response.headers.set("Access-Control-Allow-Credentials", "true");
+
+    // Handle preflight requests right here
+    if (ctx.request.method === "OPTIONS") {
+      ctx.response.status = 204; // No Content
+      return;
+    }
+  } else if (origin) {
+    // Bad origin → block
+    ctx.response.status = 403;
+    ctx.response.body = "Forbidden: invalid CORS origin";
+    return;
+  }
+
+  await next();
+});
+
+
+app.use(logger.logger);
+app.use(logger.responseTime);
+
+// cookies
+app.use(async (ctx, next) => {
+  // próbujemy odczytać token z ciasteczka
+  let token = await ctx.cookies.get("csrf_token");
+  if (!token) {
+    // jeśli brak, generujemy nowy
+    token = crypto.randomUUID();
+    ctx.cookies.set("csrf_token", token, {
+      httpOnly: false,
+      sameSite: "strict",
+    });
+  }
+  // przechowujemy w stanie kontekstu
+  ctx.state.csrf = token;
+  await next();
+});
 
 router
   .get("/", async (ctx: Context) => {
@@ -20,14 +94,22 @@ router
     ctx.response.body = html;
   })
   .get("/usos", async (ctx: Context) => {
-    const studentsCards = await controller.getAllStudents();
-    const html = await eta.render("usos.eta", { studentsCards });
+    const students = await controller.getAllStudents();
+    ctx.response.body = await eta.render("usos.eta", {
+      studentsCards: students,
+      csrfToken: ctx.state.csrf,
+    });
     ctx.response.headers.set("Content-Type", "text/html; charset=utf-8");
-    ctx.response.body = html;
   })
   .post("/usos/add", async (ctx: Context) => {
     const formData = await ctx.request.body.formData();
-
+    const sent = formData.get("csrf_token")?.toString();
+    const real  = await ctx.cookies.get("csrf_token");
+    if (!sent || sent !== real) {
+      ctx.response.status = 403;
+      ctx.response.body = "Nieprawidłowy token CSRF";
+      return;
+    }
     const studentName = formData.get("student")?.toString();
     const subject = formData.get("subject")?.toString();
     const grade = Number(formData.get("grade"));
@@ -56,8 +138,6 @@ router
     }
   });
 
-app.use(logger.logger);
-app.use(logger.responseTime);
 app.use(router.routes());
 app.use(router.allowedMethods());
 
@@ -69,6 +149,17 @@ app.use(async (ctx, next) => {
     await next();
   }
 });
+
+app.use(async (ctx, next) => {
+  if (ctx.request.url.pathname.startsWith("/views/css")) {
+    await send(ctx, ctx.request.url.pathname, {
+      root: Deno.cwd(),
+    });
+  } else {
+    await next();
+  }
+});
+
 
 console.log(`Server listening at http://localhost:${PORT}`);
 await app.listen({ port: PORT });
