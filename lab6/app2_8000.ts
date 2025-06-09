@@ -4,8 +4,18 @@
 import { Application, Context, Router } from "jsr:@oak/oak/";
 import logger from "https://deno.land/x/oak_logger/mod.ts";
 import { encode } from "https://deno.land/x/html_entities/lib/xml-entities.js";
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
 
 const app: Application = new Application();
+
+app.use(
+  oakCors({
+    origin: "http://localhost:8001",       // lub "*" aby zezwolić każdemu
+    credentials: true,                      // potrzebne dla withCredentials / include
+    allowedMethods: ["GET", "POST", "OPTIONS"]
+  })
+);
+
 const router: Router = new Router();
 
 router.all("/submit", async (ctx: Context) => {

@@ -61,17 +61,19 @@
                   console.log(xhr.response);
                   console.groupEnd();
                   if (show_alert) {
+                    const out = document.getElementById('result');
+                    if (!out) return;
                     if (response_type === 'json') {
-                        window.alert(JSON.stringify(xhr.response));
+                        out.textContent = JSON.stringify(xhr.response);
                     } else if (response_type === 'document') {
-                        window.alert(xhr.response.documentElement.outerHTML);
+                        out.textContent = xhr.response.documentElement.outerHTML;
                     } else {
-                        window.alert(xhr.response);
+                        out.textContent = xhr.response;
                     }
-                  } else { 
+                } else {
                     results.set(`ajax ${http_method} ${response_type}`, xhr.response);
-                    dispatchEvent(received); 
-                  }
+                    dispatchEvent(received);
+                }
               }
           });
       
@@ -189,21 +191,24 @@
               }
               console.log(result);
               console.groupEnd();   
-              if(show_alert)
-                  result.then(data => {
-                      if(response_type === 'json')
-                          window.alert(JSON.stringify(data));
-                      else
-                          window.alert(data);
-                  });
-
-              else {
-                  results.set(`fetch ${http_method} ${response_type}`, result);
-                  dispatchEvent(received);
-              }
+              if (show_alert) {
+                result.then(data => {
+                    const out = document.getElementById('result');
+                    if (!out) return;
+                    if (response_type === 'json') {
+                        out.textContent = JSON.stringify(data);
+                    } else {
+                        out.textContent = data;
+                    }
+                });
+            } else {
+                results.set(`fetch ${http_method} ${response_type}`, result);
+                dispatchEvent(received);
+            }
           })
           .catch(function (error) { // if the promise is rejected
-              window.alert(error);
+              const out = document.getElementById('result');
+              if (out) out.textContent = `Error: ${error}`;
           });
       }
     </script>
@@ -275,7 +280,7 @@
           </td>
         </tr>
       </table>
-      
+      <div id="result" style="margin-top:1em; padding:1em;"></div>
     </main>
     <h1>Unit tests</h1>
     <button onclick="window.location.reload();">Restart</button>
