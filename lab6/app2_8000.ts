@@ -63,6 +63,28 @@ router.all("/submit", async (ctx: Context) => {
   }
 });
 
+// Proxy do World Time API:
+router.get("/time", async (ctx: Context) => {
+  const city = ctx.request.url.searchParams.get("city") || "";
+  const url = `https://www.timeapi.io/api/Time/current/zone?timeZone=Europe/${encodeURIComponent(city)}`;
+
+  try {
+    const resp = await fetch(url);
+    ctx.response.status = resp.status;
+    ctx.response.type = resp.headers.get("content-type") || "application/json";
+
+    if (resp.status === 200) {
+      ctx.response.body = await resp.json();
+    } else {
+      ctx.response.body = { error: await resp.text() };
+    }
+  } catch (e) {
+    ctx.response.status = 500;
+    ctx.response.body = { error: e.message };
+  }
+});
+
+
 // Middlewares
 app.use(router.routes());
 app.use(router.allowedMethods());

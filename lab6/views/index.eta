@@ -129,88 +129,72 @@
       /* response_type ∈ ["text", "json", "xml"]                                            */ 
       /* name — Contents of the form's text box — data that needs to be sent asynchronously */
       /**************************************************************************************/
-      function requestFetchAPI(http_method, response_type, name, show_alert=false) {
-          let accept = '*/*';
-      
-          switch(response_type){
-              case 'json':
-                  accept = 'application/json';
-                  break;
-              case 'xml':
-                  accept = 'application/xml';
-                  break;
-          }
-          //--------------------------------------------------------------------------
-          // Configuration and execution of the (asynchronous) query to the web server
-          //--------------------------------------------------------------------------
-              ((http_method) => {
-                  if(http_method === 'GET')
-                      return fetch('http://localhost:8000/submit?name=' + encodeURIComponent(name), { // MODIFIED
-                          method: 'GET',
-                          credentials: "include", // DO NOT MODIFY OR REMOVE
-                          headers: {
-                              //****************************************************************************************
-                              // What is the acceptable data type—the server part should return data of the given type
-                              //****************************************************************************************
-                              Accept: accept
-                          }
-                      });
-                  if(http_method === 'POST')
-                      return fetch('http://localhost:8000/submit', {
-                          method: 'POST',
-                          credentials: "include", // // DO NOT MODIFY OR REMOVE
-                          // TO BE ADDED — you need to determine the content of the body
-                          headers: {
-                              // TO BE ADDED:
-                              'Content-Type': 'application/x-www-form-urlencoded', // ADDED
-                              //****************************************************************************************
-                              // What is the acceptable data type—the server part should return data of the given type
-                              //****************************************************************************************
-                              Accept: accept
-                          },
-                          // TO BE ADDED:
-                          body: 'name=' + encodeURIComponent(name) // ADDED
-                      });
-      
-          })(http_method) // a promise is returned
-          .then(function (response) { // if the promise is fulfilled
-              if (!response.ok)
-                  throw Error(response.statusText);
-      
-              console.group('Fetch API');
-              console.log(`HTTP method ⟶\t\t${http_method}\nResponse type ⟶\t${response_type}\nInput data ⟶\t\t${name}`);
-              let result;
-      
-              if (!response.headers.get('content-type')?.includes('application/json')) {
-                  // If the received data is plain text or an XML document
-                  result = response.text(); 
-              }
-              else {
-                  //If the received data is a JSON document
-                  result = response.json();
-              }
-              console.log(result);
-              console.groupEnd();   
-              if (show_alert) {
-                result.then(data => {
-                    const out = document.getElementById('result');
-                    if (!out) return;
-                    if (response_type === 'json') {
-                        out.textContent = JSON.stringify(data);
-                    } else {
-                        out.textContent = data;
-                    }
-                });
+      async function requestFetchAPI(http_method, response_type, name, show_alert=false) {
+        const urlBase = 'http://localhost:8000/submit';
+        const headers = { 
+            'Accept': response_type === 'json' ? 'application/json' : (response_type === 'xml' ? 'application/xml' : '*/*')
+        };
+        if (http_method === 'POST') {
+            headers['Content-Type'] = 'application/x-www-form-urlencoded';
+        }
+
+        try {
+            let response;
+            if (http_method === 'GET') {
+            response = await fetch(`${urlBase}?name=${encodeURIComponent(name)}`, {
+                method: 'GET',
+                credentials: 'include',
+                headers
+            });
             } else {
-                results.set(`fetch ${http_method} ${response_type}`, result);
-                dispatchEvent(received);
+            response = await fetch(urlBase, {
+                method: 'POST',
+                credentials: 'include',
+                headers,
+                body: `name=${encodeURIComponent(name)}`
+            });
             }
-          })
-          .catch(function (error) { // if the promise is rejected
-              const out = document.getElementById('result');
-              if (out) out.textContent = `Error: ${error}`;
-          });
+
+            if (!response.ok) throw new Error(response.statusText);
+
+            let data = response.headers.get('content-type')?.includes('application/json') ? await response.json() : await response.text();
+
+            if (show_alert) {
+            const out = document.getElementById('result');
+            if (!out) return;
+            if (response_type === 'json') out.textContent = JSON.stringify(data);
+            else out.textContent = data;
+            } else {
+            results.set(`fetch ${http_method} ${response_type}`, Promise.resolve(data));
+            dispatchEvent(received);
+            }
+        } catch (err) {
+            const out = document.getElementById('result');
+            if (out) out.textContent = `Error: ${err.message}`;
+        }
       }
+
+		function getTime(europe_city) {
+			return new Promise((resolve, reject) => {
+				(async () => {
+					try {
+						const resp = await fetch(`http://localhost:8000/time?city=${encodeURIComponent(europe_city)}`);
+
+						const isJSON = resp.headers.get('content-type')?.includes('application/json');
+						const data = isJSON ? await resp.json() : await resp.text();
+
+						if (!resp.ok) {
+							return reject(isJSON ? data.error || `Error ${resp.status}` : data);
+						}
+
+						resolve(data.dateTime);
+					} catch (err) {
+						reject(`Network error: ${err.message}`);
+					}
+				})();
+			});
+		}
+
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mocha/mocha.js"> </script>
     <script type="module">
@@ -281,6 +265,11 @@
         </tr>
       </table>
       <div id="result" style="margin-top:1em; padding:1em;"></div>
+        <div style="margin-top:1em;">
+        <label for="city">European city:</label>
+        <input type="text" id="city" name="city" placeholder="e.g. London">
+        <button type="button" id="btnGetTime">Get Time</button>
+      </div>
     </main>
     <h1>Unit tests</h1>
     <button onclick="window.location.reload();">Restart</button>
@@ -370,7 +359,26 @@
               mocha.run();
               test_executed = true;
           }
-      });        
+      });     
+
+			document.getElementById('btnGetTime').addEventListener('click', async () => {
+				const cityInput = document.getElementById('city');
+				if (!(cityInput instanceof HTMLInputElement)) return;
+				const city = cityInput.value.trim();
+				const out = document.getElementById('result');
+				if (!out) return;
+				out.textContent = 'Loading…';
+
+				try {
+					const timeString = await getTime(city);
+					out.textContent = `Current time in ${city}: ${timeString}`;
+				} catch (err) {
+					out.textContent = `Error fetching time for ${city}: ${err}`;
+				}
+			});
+
+
+  
     </script>
   </body>
 </html>        
