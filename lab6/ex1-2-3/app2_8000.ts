@@ -10,8 +10,8 @@ const app: Application = new Application();
 
 app.use(
   oakCors({
-    origin: "http://localhost:8001",       // lub "*" aby zezwolić każdemu
-    credentials: true,                      // potrzebne dla withCredentials / include
+    origin: "http://localhost:8001", 
+    credentials: true,    
     allowedMethods: ["GET", "POST", "OPTIONS"]
   })
 );
