@@ -1,7 +1,6 @@
-// public/script.js
 const API_URL = "http://localhost:8000/api";
 
-// Pomocnik do pobrania i sparsowania XML
+// Funkcja do pobrania i sparsowania XML
 async function fetchXML(url) {
   const res = await fetch(url, { headers: { "Accept": "application/xml" } });
   const text = await res.text();
@@ -35,7 +34,7 @@ async function fetchStudents(course) {
   return list;
 }
 
-// Dodaje ocenę (POST)
+// Dodaje ocenę
 async function addGrade(studentId, grade) {
   const body = `<grade>${grade}</grade>`;
   await fetch(`${API_URL}/students/${studentId}/grades`, {
@@ -48,7 +47,7 @@ async function addGrade(studentId, grade) {
   });
 }
 
-// Usuwa ocenę (DELETE)
+// Usuwa ocenę
 async function deleteGrade(studentId, index) {
   await fetch(`${API_URL}/students/${studentId}/grades/${index}`, {
     method: "DELETE",
@@ -66,7 +65,7 @@ function setupInteractions() {
     });
   });
 
-  // drop na karcie → dodaj ocenę
+  // drop na karcie
   document.querySelectorAll(".card-content").forEach(content => {
     content.addEventListener("dragover", e => e.preventDefault());
     content.addEventListener("drop", async e => {
@@ -81,7 +80,7 @@ function setupInteractions() {
     });
   });
 
-  // drop na istniejącej ocenie → zamień ocenę
+  // drop na istniejącej ocenie
   document.querySelectorAll(".tag.grade").forEach(tag => {
     tag.setAttribute("draggable", "true");
     tag.addEventListener("dragover", e => e.preventDefault());
@@ -92,13 +91,12 @@ function setupInteractions() {
       const id       = card?.getAttribute("data-studentid");
       const idx      = tag.getAttribute("data-index");
       if (id && idx != null && newGrade) {
-        // najpierw usuń starą ocenę, potem dodaj nową
         await deleteGrade(id, Number(idx));
         await addGrade(id, newGrade);
         loadAndRender();
       }
     });
-    // klik → usuń ocenę
+    // klikięcie usuwa ocenę
     tag.addEventListener("click", async () => {
       const card = tag.closest(".card");
       const id   = card?.getAttribute("data-studentid");

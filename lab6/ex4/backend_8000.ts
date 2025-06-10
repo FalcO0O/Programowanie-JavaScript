@@ -1,9 +1,7 @@
-// backend.ts - Deno backend (Oak, port 8000)
 import { Application, Router, send } from "https://deno.land/x/oak/mod.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
-import { DOMParser } from "https://deno.land/x/deno_dom/deno-dom-wasm.ts";
 
-// In-memory data: skala ocen i lista studentów
+// Lokalna baza
 const gradeScale = [2, 3, 4, 5];
 interface Student { id: string; name: string; course: string; image: string; grades: number[]; }
 const students: Student[] = [
@@ -15,10 +13,10 @@ const students: Student[] = [
 const app = new Application();
 const router = new Router();
 
-// Włącz CORS
+// CORS
 app.use(oakCors());
 
-// GET /api/gradescale – lista ocen
+// Lista ocen
 router.get("/api/gradescale", (ctx) => {
     const accept = ctx.request.headers.get("Accept") || "";
     const wantsXML = accept.includes("application/xml");
@@ -37,7 +35,7 @@ router.get("/api/gradescale", (ctx) => {
     }
 });
 
-// GET /api/courses/:course/students – studenci danego kursu
+// GET studenci danego kursu
 router.get("/api/courses/:course/students", (ctx) => {
     const course = ctx.params.course!;
     const courseStudents = students.filter(s => s.course === course);
@@ -63,7 +61,7 @@ router.get("/api/courses/:course/students", (ctx) => {
     }
 });
 
-// POST /api/students/:id/grades – dodaj ocenę do studenta (body jako XML lub JSON)
+// POST dodaje ocenę do studenta (body jako XML lub JSON)
 router.post("/api/students/:id/grades", async (ctx) => {
     const id = ctx.params.id!;
     const student = students.find(s => s.id === id);
@@ -75,13 +73,11 @@ router.post("/api/students/:id/grades", async (ctx) => {
     const contentType = ctx.request.headers.get("Content-Type") || "";
     let gradeValue: string | null = null;
     if (contentType.includes("xml")) {
-        const bodyText = await ctx.request.body({ type: "text" }).value;
-        const xmlDoc = new DOMParser().parseFromString(bodyText, "application/xml");
-        if (xmlDoc) {
-            gradeValue = xmlDoc.querySelector("grade")?.textContent || null;
-        }
+        const bodyText = (await ctx.request.body.text());
+        const m = bodyText.match(/<grade>([^<]+)<\/grade>/);
+        gradeValue = m ? m[1] : null;
     } else {
-        const body = await ctx.request.body().value;
+        const body = await ctx.request.body.json();
         gradeValue = body.grade?.toString() || null;
     }
     if (gradeValue) {
@@ -93,7 +89,7 @@ router.post("/api/students/:id/grades", async (ctx) => {
     ctx.response.status = 204; // No Content
 });
 
-// DELETE /api/students/:id/grades/:index – usuń ocenę o indeksie
+// DELETE usuwa ocenę o indeksie
 router.delete("/api/students/:id/grades/:index", (ctx) => {
     const id = ctx.params.id!;
     const index = Number(ctx.params.index);
@@ -112,7 +108,7 @@ router.delete("/api/students/:id/grades/:index", (ctx) => {
     ctx.response.status = 204; // No Content
 });
 
-// Serwowanie statycznych plików ze ścieżki /images
+// Serwowanie zdjęć ze ścieżki /images
 app.use(async (ctx, next) => {
     if (ctx.request.url.pathname.startsWith("/images/")) {
         await send(ctx, ctx.request.url.pathname, { root: Deno.cwd() });
@@ -121,7 +117,7 @@ app.use(async (ctx, next) => {
     }
 });
 
-// Rejestracja routera i start serwera
+// Start serwera
 app.use(router.routes());
 app.use(router.allowedMethods());
 console.log("Backend server running on http://localhost:8000");

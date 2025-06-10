@@ -1,11 +1,10 @@
-// frontend.ts - Deno front-end server (Oak, port 8001, Eta)
 import { Application, Router, send } from "https://deno.land/x/oak/mod.ts";
 import { renderFile } from "https://deno.land/x/eta@v1.11.0/mod.ts"
 
 const app = new Application();
 const router = new Router();
 
-// GET / - renderuje stronę z szablonu index.eta
+// Renderuje stronę z index.eta
 router.get("/", async (ctx) => {
     const body = await renderFile(`${Deno.cwd()}/views/index.eta`, {});
     if (body) {
@@ -14,7 +13,7 @@ router.get("/", async (ctx) => {
     }
 });
 
-// Serwowanie skryptu klienta (script.ts)
+// Serwowanie skryptu klienta
 app.use(async (ctx, next) => {
     if (ctx.request.url.pathname === "/script.js") {
         await send(ctx, ctx.request.url.pathname, { root: Deno.cwd() });
